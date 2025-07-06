@@ -20,9 +20,9 @@ describe('TimerService', () => {
 
   it('should start and complete a timer', () => {
     service.start('t', 0, 1);
-    expect(service.state().running).toBe(true);
+    expect(service.timers().length).toBe(1);
     jest.advanceTimersByTime(1000);
-    expect(service.state().running).toBe(false);
+    expect(service.timers().length).toBe(0);
     expect(history.history().length).toBe(1);
   });
 });
