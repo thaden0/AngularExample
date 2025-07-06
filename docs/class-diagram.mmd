@@ -1,0 +1,16 @@
+```mermaid
+classDiagram
+    class App
+    App --> TimerFormComponent
+    App --> TimerDisplayComponent
+    App --> HistoryComponent
+
+    class TimerService
+    TimerService --> HistoryService
+    TimerService --> NotificationService
+
+    HistoryService <.. TimerDisplayComponent
+    HistoryService <.. HistoryComponent
+    TimerService <.. TimerDisplayComponent
+    TimerService <.. TimerFormComponent
+```
