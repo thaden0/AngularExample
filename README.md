@@ -1,3 +1,5 @@
+![image](https://github.com/user-attachments/assets/a4ea7afd-b8df-4f0b-9ecb-04d38360bb5d)
+
 # Angular Signal-Based Timer App
 
 This is a demo application built with **Angular 20**, designed to showcase expertise in modern Angular features such as **Signals**, **standalone components**, **inject()**, and clean reactive state management. It is intended as a technical follow-up to my interview with Brinqa, specifically to demonstrate Angular fluency in a practical, testable project.
