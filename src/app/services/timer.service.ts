@@ -35,9 +35,9 @@ export class TimerService {
       remainingMs: totalMs,
       start,
       end,
-      running: true
+      running: true,
     };
-    this.timersSignal.update(list => [...list, timer]);
+    this.timersSignal.update((list) => [...list, timer]);
     const intervalId = setInterval(() => {
       this.tick(timer.id);
     }, 1000);
@@ -53,17 +53,16 @@ export class TimerService {
   }
 
   private tick(id: number): void {
-    this.timersSignal.update(list =>
-      list.map(t => {
-        if (t.id !== id) return t;
-        const remaining = t.remainingMs - 1000;
-        if (remaining <= 0) {
-          this.complete(t);
-          return t;
-        }
-        return { ...t, remainingMs: remaining };
-      })
-    );
+    const timer = this.timersSignal().find((t) => t.id === id);
+    if (!timer) return;
+    const remaining = timer.remainingMs - 1000;
+    if (remaining <= 0) {
+      this.complete(timer);
+    } else {
+      this.timersSignal.update((list) =>
+        list.map((t) => (t.id === id ? { ...t, remainingMs: remaining } : t))
+      );
+    }
   }
 
   private complete(timer: Timer): void {

@@ -7,18 +7,21 @@ import { TimerService } from '../services/timer.service';
   standalone: true,
   imports: [FormsModule],
   template: `
-  <form class="row g-2" (ngSubmit)="set()" #f="ngForm" novalidate>
+  <form class="row g-3 align-items-end" (ngSubmit)="set()" #f="ngForm" novalidate>
     <div class="col-12 col-md-4">
-      <input class="form-control" name="title" [(ngModel)]="title" placeholder="Title" required />
+      <label for="title" class="form-label">Title</label>
+      <input id="title" class="form-control" name="title" [(ngModel)]="title" required />
     </div>
     <div class="col-4 col-md-2">
-      <input type="number" class="form-control" name="minutes" [(ngModel)]="minutes" min="0" placeholder="Min" required />
+      <label for="minutes" class="form-label">Minutes</label>
+      <input id="minutes" type="number" class="form-control" name="minutes" [(ngModel)]="minutes" min="0" required />
     </div>
     <div class="col-4 col-md-2">
-      <input type="number" class="form-control" name="seconds" [(ngModel)]="seconds" min="0" max="59" placeholder="Sec" required />
+      <label for="seconds" class="form-label">Seconds</label>
+      <input id="seconds" type="number" class="form-control" name="seconds" [(ngModel)]="seconds" min="0" max="59" required />
     </div>
-    <div class="col-4 col-md-2">
-      <button class="btn btn-primary w-100" type="submit" [disabled]="!validTime()">Set</button>
+    <div class="col-4 col-md-2 d-grid">
+      <button class="btn btn-primary" type="submit" [disabled]="!validTime()">Set</button>
     </div>
   </form>`
 })
