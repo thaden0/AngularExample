@@ -9,7 +9,7 @@ describe('TimerFormComponent', () => {
     await render(TimerFormComponent, {
       providers: [TimerService, HistoryService, NotificationService]
     });
-    const button = screen.getByRole('button', { name: /set/i });
-    expect(button).toBeDisabled();
+    const button = screen.getByRole('button', { name: /set/i }) as HTMLButtonElement;
+    expect(button.disabled).toBe(true);
   });
 });
