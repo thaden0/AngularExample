@@ -17,8 +17,8 @@ import { TimerService } from '../services/timer.service';
 })
 export class TimerDisplayComponent {
   constructor(private svc: TimerService) {}
-  state = this.svc.state;
-  progress = this.svc.progress;
+  get state() { return this.svc.state; }
+  get progress() { return this.svc.progress; }
 
   cancel(): void {
     this.svc.cancel();
