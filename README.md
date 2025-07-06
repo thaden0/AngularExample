@@ -38,11 +38,6 @@ The application was built from scratch in under an hour, following modern Angula
 - `TimerService`: Core reactive timer state (using Signals)
 - `HistoryService`: Tracks previously completed timers
 
-## Accessibility
-
-- ARIA roles and live regions are used to ensure screen reader compatibility
-- High-contrast UI design for visual clarity
-
 ## How to Run
 
 ```bash
