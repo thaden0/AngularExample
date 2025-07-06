@@ -11,25 +11,26 @@ describe('TimerService', () => {
     TestBed.configureTestingModule({ providers: [TimerService, HistoryService, NotificationService] });
     service = TestBed.inject(TimerService);
     history = TestBed.inject(HistoryService);
-    (global as any).alert = jest.fn();
-    jest.useFakeTimers();
+    (window as any).alert = jasmine.createSpy('alert');
+    jasmine.clock().install();
   });
 
   afterEach(() => {
-    delete (global as any).alert;
-    jest.useRealTimers();
+    delete (window as any).alert;
+    jasmine.clock().uninstall();
   });
 
   it('should start and complete a timer', () => {
     service.start('t', 0, 1);
     expect(service.timers().length).toBe(1);
-    jest.advanceTimersByTime(1000);
+    jasmine.clock().tick(1000);
     expect(service.timers().length).toBe(0);
     expect(history.history().length).toBe(1);
   });
 
   it('cancels a running timer', () => {
     service.start('t', 0, 5);
+    expect(service.timers().length).toBe(1);
     const id = service.timers()[0].id;
     service.cancel(id);
     expect(service.timers().length).toBe(0);
