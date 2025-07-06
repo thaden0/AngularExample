@@ -1,27 +1,24 @@
 import { Component } from '@angular/core';
 import { NgIf } from '@angular/common';
-import { TimerService } from '../services/timer.service';
+import { TimerService, Timer } from '../services/timer.service';
 
 @Component({
   selector: 'app-timer-display',
   standalone: true,
   imports: [NgIf],
   template: `
-  <div *ngIf="state().running" class="mt-3" role="timer" aria-live="polite">
-    <div class="progress mb-2" *ngIf="state().totalMs">
-      <div class="progress-bar" [style.width.%]="(1 - progress()) * 100"></div>
-    </div>
-    <h2 class="h5">{{state().title}}: {{display(state().remainingMs)}}</h2>
+  <div *ngIf="current()" class="mt-3" role="timer" aria-live="polite">
+    <h2 class="h5">{{current()?.title}}: {{display(current()?.remainingMs || 0)}}</h2>
     <button class="btn btn-secondary btn-sm" (click)="cancel()">Cancel</button>
   </div>`
 })
 export class TimerDisplayComponent {
   constructor(private svc: TimerService) {}
-  get state() { return this.svc.state; }
-  get progress() { return this.svc.progress; }
+  get current() { return () => this.svc.timers().at(0); }
 
   cancel(): void {
-    this.svc.cancel();
+    const t = this.svc.timers().at(0);
+    if (t) this.svc.cancel(t.id);
   }
 
   display(ms: number): string {
